@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="description"
+      content="Search two trusted book databases at once with ShelfScout."
+    >
+    <meta name="theme-color" content="#183b4e">
+    <link rel="icon" href="/book-finder-favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="/src/css/styles.css">
+    <script type="module" src="/src/js/main.js"></script>
+    <title>ShelfScout | Find your next book</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to search</a>
+
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="ShelfScout home">
+        <img src="/book-finder-icon.png" alt="" width="48" height="48">
+        <span>ShelfScout</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a aria-current="page" href="./">Discover</a>
+        <a href="#about">About</a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="eyebrow">Two libraries. One search.</p>
+        <h1 id="hero-title">Find the book that belongs on your next shelf.</h1>
+        <p class="hero-copy">
+          Search Open Library and Google Books together, then compare dependable
+          details in one calm reading space.
+        </p>
+
+        <form class="search-form" id="search-form" role="search">
+          <label for="search-query">Title, author, ISBN, or subject</label>
+          <div class="search-controls">
+            <input
+              id="search-query"
+              name="query"
+              type="search"
+              minlength="2"
+              maxlength="100"
+              autocomplete="off"
+              placeholder="Try The Hobbit or Octavia Butler"
+              required
+            >
+            <button type="submit">Search books</button>
+          </div>
+          <p class="field-hint">Enter at least two characters.</p>
+        </form>
+
+        <div class="quick-searches" role="group" aria-label="Suggested searches">
+          <span>Popular:</span>
+          <button type="button" data-query="science fiction">Science fiction</button>
+          <button type="button" data-query="mystery">Mystery</button>
+          <button type="button" data-query="web development">Web development</button>
+        </div>
+      </section>
+
+      <section class="results-section" aria-labelledby="results-title">
+        <div class="results-heading">
+          <div>
+            <p class="eyebrow">Search results</p>
+            <h2 id="results-title">Ready when you are</h2>
+          </div>
+          <p id="result-count" aria-live="polite"></p>
+        </div>
+
+        <div id="status" class="status" role="status" aria-live="polite">
+          <div class="status-icon" aria-hidden="true">⌕</div>
+          <p>Search for a title, author, ISBN, or subject to start exploring.</p>
+        </div>
+        <div id="results" class="book-grid" aria-live="polite"></div>
+      </section>
+
+      <section class="about" id="about" aria-labelledby="about-title">
+        <div>
+          <p class="eyebrow">Built for curious readers</p>
+          <h2 id="about-title">Better context, fewer tabs.</h2>
+        </div>
+        <p>
+          ShelfScout brings public book information into one accessible,
+          responsive interface. Results clearly identify their source and remain
+          usable even if one service is temporarily unavailable.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; <span id="current-year"></span> ShelfScout</p>
+      <p>
+        Book data from
+        <a href="https://openlibrary.org/developers/api" target="_blank" rel="noreferrer">Open Library</a>
+        and
+        <a href="https://developers.google.com/books" target="_blank" rel="noreferrer">Google Books</a>.
+      </p>
+    </footer>
+  </body>
+</html>
