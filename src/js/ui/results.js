@@ -68,10 +68,6 @@ export function renderBooks(container, books) {
 
 export function renderStatus(statusElement, message, type = "info") {
   statusElement.className = `status status--${type}`;
-  statusElement.replaceChildren();
-
-  const icon = createElement("div", "status-icon", type === "loading" ? "···" : type === "error" ? "!" : "⌕");
-  icon.setAttribute("aria-hidden", "true");
-  statusElement.append(icon, createElement("p", "", message));
+  statusElement.replaceChildren(createElement("p", "", message));
   statusElement.hidden = false;
 }
