@@ -66,4 +66,5 @@ This week I learned how to coordinate multiple asynchronous API requests while k
 
 ## Project tracking
 
-- Trello board: Pending board URL/account access
+- Trello board: https://trello.com/b/tsifjVO6/wdd-330-book-finder-final-project
+- Progress: 6 Week 5 cards are marked complete (60% milestone).
