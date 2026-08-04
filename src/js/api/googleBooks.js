@@ -1,10 +1,11 @@
 import { normalizeGoogleBook } from "../models/book.js";
+import { fetchWithTimeout } from "./fetchWithTimeout.js";
 
 const GOOGLE_BOOKS_URL = "https://www.googleapis.com/books/v1/volumes";
 
 export async function searchGoogleBooks(query, signal) {
   const parameters = new URLSearchParams({ q: query, maxResults: "12", printType: "books" });
-  const response = await fetch(`${GOOGLE_BOOKS_URL}?${parameters}`, { signal });
+  const response = await fetchWithTimeout(`${GOOGLE_BOOKS_URL}?${parameters}`, { signal });
 
   if (!response.ok) {
     throw new Error(`Google Books returned ${response.status}.`);

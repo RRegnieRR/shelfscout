@@ -1,4 +1,5 @@
 import { normalizeOpenLibraryBook } from "../models/book.js";
+import { fetchWithTimeout } from "./fetchWithTimeout.js";
 
 const OPEN_LIBRARY_URL = "https://openlibrary.org/search.json";
 
@@ -8,7 +9,7 @@ export async function searchOpenLibrary(query, signal) {
     limit: "12",
     fields: "key,title,author_name,first_publish_year,cover_i,isbn,subject",
   });
-  const response = await fetch(`${OPEN_LIBRARY_URL}?${parameters}`, { signal });
+  const response = await fetchWithTimeout(`${OPEN_LIBRARY_URL}?${parameters}`, { signal });
 
   if (!response.ok) {
     throw new Error(`Open Library returned ${response.status}.`);

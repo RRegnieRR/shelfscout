@@ -13,6 +13,12 @@ Live site: [https://rregnierr.github.io/shelfscout/](https://rregnierr.github.io
 - Defined one normalized book model and ISBN/title-based deduplication.
 - Added safe DOM rendering for book cards and loading, empty, partial-failure, and full-error states.
 
+## Week 6 progress
+
+- Added a reusable 10-second request timeout for both book services.
+- Preserved cancellation when a new search replaces an older request.
+- Added a Professional Development Document and Week 6 task report.
+
 ## Run locally
 
 ```bash
