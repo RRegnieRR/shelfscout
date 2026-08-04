@@ -17,6 +17,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -32,7 +36,8 @@ a {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
@@ -248,6 +253,29 @@ h1 {
   border-color: var(--ink);
 }
 
+.recent-searches,
+.recent-searches > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.recent-searches {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.recent-searches button {
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: var(--paper);
+  cursor: pointer;
+}
+
 .results-section {
   padding: clamp(3.5rem, 7vw, 5.5rem) 0;
   border-top: 1px solid var(--line);
@@ -279,6 +307,33 @@ h1 {
   font-size: 0.8rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.result-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: -1rem 0 2.5rem;
+}
+
+.result-tools label,
+.reading-control {
+  display: grid;
+  gap: 0.4rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.result-tools select,
+.reading-control select {
+  min-height: 42px;
+  padding: 0.55rem 2rem 0.55rem 0.75rem;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: var(--paper);
 }
 
 .status {
@@ -404,6 +459,134 @@ h1 {
   text-transform: uppercase;
 }
 
+.book-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1rem;
+}
+
+.book-action,
+.secondary-button,
+.pagination button,
+.dialog-close {
+  min-height: 38px;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: var(--paper);
+  cursor: pointer;
+}
+
+.book-action:hover,
+.secondary-button:hover,
+.pagination button:hover:not(:disabled) {
+  border-color: var(--ink);
+}
+
+.library-status {
+  margin: 0.2rem 0 0;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.shelf-section {
+  padding: clamp(3.5rem, 7vw, 5.5rem) 0;
+  border-top: 1px solid var(--line);
+}
+
+.status-message {
+  padding: 1.25rem 0;
+  border-block: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.book-dialog {
+  width: min(900px, calc(100% - 2rem));
+  max-height: calc(100vh - 2rem);
+  padding: 0;
+  border: 0;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.book-dialog::backdrop {
+  background: rgb(0 0 0 / 68%);
+}
+
+.book-detail {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.25fr);
+  gap: clamp(1.5rem, 5vw, 4rem);
+  padding: clamp(1.5rem, 5vw, 4rem);
+}
+
+.dialog-close {
+  position: absolute;
+  z-index: 1;
+  top: 0.8rem;
+  right: 0.8rem;
+}
+
+.book-detail__cover {
+  display: grid;
+  place-items: center;
+  min-height: 360px;
+  padding: 2rem;
+  background: var(--soft);
+}
+
+.book-detail__cover img {
+  width: auto;
+  max-width: 100%;
+  max-height: 390px;
+  filter: drop-shadow(0 9px 8px rgb(0 0 0 / 14%));
+}
+
+.book-detail__cover span {
+  font: 400 4rem "Libre Baskerville", serif;
+}
+
+.book-detail__content {
+  align-self: center;
+}
+
+.book-detail__content h2 {
+  margin-bottom: 0.8rem;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+}
+
+.book-detail__description {
+  max-height: 12rem;
+  overflow-y: auto;
+  line-height: 1.7;
+}
+
+.detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
 .partial-notice {
   margin: -0.75rem 0 2rem;
   padding: 0.85rem 0;
@@ -512,6 +695,14 @@ footer a {
 
   .about {
     grid-template-columns: 1fr;
+  }
+
+  .book-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .book-detail__cover {
+    min-height: 260px;
   }
 }
 

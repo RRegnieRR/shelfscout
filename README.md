@@ -17,6 +17,11 @@ Live site: [https://rregnierr.github.io/shelfscout/](https://rregnierr.github.io
 
 - Added a reusable 10-second request timeout for both book services.
 - Preserved cancellation when a new search replaces an older request.
+- Added accessible book details for results and saved books.
+- Added persistent favorites, reading statuses, and a My Shelf view.
+- Added six reusable recent searches stored in the browser.
+- Added source filtering, title/year sorting, and six-result pagination.
+- Verified interactive behavior and responsive mobile/desktop layouts.
 - Added a Professional Development Document and Week 6 task report.
 
 ## Run locally

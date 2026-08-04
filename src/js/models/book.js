@@ -42,7 +42,7 @@ export function normalizeGoogleBook(item) {
     authors: cleanList(details.authors),
     publishedYear: Number.parseInt(details.publishedDate, 10) || null,
     coverUrl: details.imageLinks?.thumbnail?.replace("http://", "https://") || FALLBACK_COVER,
-    description: cleanText(details.description, "").slice(0, 180),
+    description: cleanText(details.description, "").slice(0, 700),
     isbn,
   };
 }

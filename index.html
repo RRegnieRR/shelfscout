@@ -29,6 +29,7 @@
       </a>
       <nav aria-label="Primary navigation">
         <a aria-current="page" href="./">Discover</a>
+        <a href="#my-shelf">My shelf</a>
         <a href="#about">About</a>
       </nav>
     </header>
@@ -66,6 +67,11 @@
           <button type="button" data-query="mystery">Mystery</button>
           <button type="button" data-query="web development">Web development</button>
         </div>
+
+        <div id="recent-searches" class="recent-searches" hidden>
+          <span>Recent:</span>
+          <div id="recent-search-list" role="group" aria-label="Recent searches"></div>
+        </div>
       </section>
 
       <section class="results-section" aria-labelledby="results-title">
@@ -77,10 +83,49 @@
           <p id="result-count" aria-live="polite"></p>
         </div>
 
+        <div id="result-tools" class="result-tools" hidden>
+          <label>
+            Source
+            <select id="source-filter">
+              <option value="all">All sources</option>
+              <option value="Open Library">Open Library</option>
+              <option value="Google Books">Google Books</option>
+            </select>
+          </label>
+          <label>
+            Sort
+            <select id="sort-results">
+              <option value="relevance">Relevance</option>
+              <option value="title">Title A–Z</option>
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+            </select>
+          </label>
+        </div>
+
         <div id="status" class="status status--info" role="status" aria-live="polite">
           <p>Your matches from Open Library and Google Books will appear here.</p>
         </div>
         <div id="results" class="book-grid" aria-live="polite"></div>
+        <nav id="pagination" class="pagination" aria-label="Search result pages" hidden>
+          <button id="previous-page" type="button">Previous</button>
+          <span id="page-status" aria-live="polite"></span>
+          <button id="next-page" type="button">Next</button>
+        </nav>
+      </section>
+
+      <section class="shelf-section" id="my-shelf" aria-labelledby="shelf-title">
+        <div class="results-heading">
+          <div>
+            <p class="eyebrow">Saved locally</p>
+            <h2 id="shelf-title">My shelf</h2>
+          </div>
+          <p id="shelf-count" aria-live="polite"></p>
+        </div>
+        <p id="shelf-empty" class="status-message">
+          Favorite a book or add it to your reading list and it will appear here.
+        </p>
+        <div id="shelf-results" class="book-grid" aria-live="polite"></div>
       </section>
 
       <section class="about" id="about" aria-labelledby="about-title">
@@ -95,6 +140,10 @@
         </p>
       </section>
     </main>
+
+    <dialog id="book-dialog" class="book-dialog" aria-labelledby="dialog-title">
+      <div id="book-dialog-content"></div>
+    </dialog>
 
     <footer>
       <p>&copy; <span id="current-year"></span> ShelfScout</p>

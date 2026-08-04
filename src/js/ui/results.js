@@ -25,7 +25,13 @@ function createCover(book) {
   return cover;
 }
 
-function createBookCard(book) {
+const READING_LABELS = {
+  "want-to-read": "Want to read",
+  reading: "Reading",
+  finished: "Finished",
+};
+
+function createBookCard(book, entry = {}) {
   const card = createElement("article", "book-card");
   card.append(createCover(book));
 
@@ -49,6 +55,35 @@ function createBookCard(book) {
     body.append(createElement("p", "book-description", book.description));
   }
 
+  if (entry.favorite || READING_LABELS[entry.status]) {
+    const labels = [entry.favorite ? "Favorite" : "", READING_LABELS[entry.status] || ""].filter(Boolean);
+    body.append(createElement("p", "library-status", labels.join(" · ")));
+  }
+
+  const actions = createElement("div", "book-actions");
+  const details = createElement("button", "book-action", "Details");
+  details.type = "button";
+  details.dataset.action = "details";
+  details.dataset.bookId = book.id;
+
+  const favorite = createElement("button", "book-action", entry.favorite ? "★ Favorite" : "☆ Favorite");
+  favorite.type = "button";
+  favorite.dataset.action = "favorite";
+  favorite.dataset.bookId = book.id;
+  favorite.setAttribute("aria-pressed", String(Boolean(entry.favorite)));
+
+  const reading = createElement(
+    "button",
+    "book-action",
+    entry.status && entry.status !== "none" ? READING_LABELS[entry.status] : "+ Reading list",
+  );
+  reading.type = "button";
+  reading.dataset.action = "reading-list";
+  reading.dataset.bookId = book.id;
+  reading.setAttribute("aria-pressed", String(Boolean(entry.status && entry.status !== "none")));
+  actions.append(details, favorite, reading);
+  body.append(actions);
+
   const sourceLink = createElement("a", "book-link", "View source");
   sourceLink.href = book.sourceUrl;
   sourceLink.target = "_blank";
@@ -60,9 +95,9 @@ function createBookCard(book) {
   return card;
 }
 
-export function renderBooks(container, books) {
+export function renderBooks(container, books, library = new Map()) {
   const fragment = document.createDocumentFragment();
-  books.forEach((book) => fragment.append(createBookCard(book)));
+  books.forEach((book) => fragment.append(createBookCard(book, library.get(book.id))));
   container.replaceChildren(fragment);
 }
 
