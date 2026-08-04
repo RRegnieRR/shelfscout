@@ -25,4 +25,4 @@ Updated `PROFESSIONAL_DEVELOPMENT.md` with a Week 6 entry about request timeouts
 ## Project tracking
 
 - Trello board: https://trello.com/b/tsifjVO6/wdd-330-book-finder-final-project
-- Required board update: Add and mark complete a Week 6 card named `Add timeouts for book-service requests`.
+- Progress: The Week 6 card `Add timeouts for book-service requests` is marked complete.
