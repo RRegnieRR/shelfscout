@@ -1,4 +1,4 @@
-import { searchInternetArchive } from "./api/internetArchive.js";
+import { searchGoogleBooks } from "./api/googleBooks.js";
 import { searchOpenLibrary } from "./api/openLibrary.js";
 import { deduplicateBooks } from "./models/book.js";
 import {
@@ -147,11 +147,11 @@ async function searchBooks(query) {
   pagination.hidden = true;
   resultCount.textContent = "";
   resultsTitle.textContent = `Searching for “${query}”`;
-  renderStatus(status, "Checking Open Library and Internet Archive…", "loading");
+  renderStatus(status, "Checking Open Library and Google Books…", "loading");
 
   const searches = await Promise.allSettled([
     searchOpenLibrary(query, activeRequest.signal),
-    searchInternetArchive(query, activeRequest.signal),
+    searchGoogleBooks(query, activeRequest.signal),
   ]);
 
   if (activeRequest.signal.aborted) return;

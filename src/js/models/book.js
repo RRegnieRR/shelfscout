@@ -30,20 +30,22 @@ export function normalizeOpenLibraryBook(document) {
   };
 }
 
-export function normalizeInternetArchiveBook(document) {
-  const identifier = cleanText(document.identifier, crypto.randomUUID());
-  const descriptions = cleanList(document.description);
-  const isbn = cleanList(document.isbn)[0] || "";
+export function normalizeGoogleBook(volume) {
+  const details = volume.volumeInfo || {};
+  const isbn = details.industryIdentifiers?.find((identifier) =>
+    ["ISBN_13", "ISBN_10"].includes(identifier.type),
+  )?.identifier || "";
+  const coverUrl = details.imageLinks?.thumbnail?.replace("http://", "https://") || FALLBACK_COVER;
 
   return {
-    id: `ia-${identifier}`,
-    source: "Internet Archive",
-    sourceUrl: `https://archive.org/details/${encodeURIComponent(identifier)}`,
-    title: cleanText(document.title, "Untitled book"),
-    authors: cleanList(document.creator),
-    publishedYear: Number.parseInt(document.date, 10) || null,
-    coverUrl: `https://archive.org/services/img/${encodeURIComponent(identifier)}`,
-    description: (descriptions[0] || cleanList(document.subject).slice(0, 4).join(" · ")).slice(0, 700),
+    id: `gb-${volume.id || crypto.randomUUID()}`,
+    source: "Google Books",
+    sourceUrl: details.infoLink || "https://books.google.com",
+    title: cleanText(details.title, "Untitled book"),
+    authors: cleanList(details.authors),
+    publishedYear: Number.parseInt(details.publishedDate, 10) || null,
+    coverUrl,
+    description: cleanText(details.description, "No description available.").slice(0, 700),
     isbn,
   };
 }

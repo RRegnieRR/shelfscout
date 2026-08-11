@@ -34,12 +34,12 @@ Implemented the search controls and responsive visual system with visible focus 
 - GitHub: https://github.com/RRegnieRR/shelfscout/blob/main/src/css/styles.css
 - Live site: https://rregnierr.github.io/shelfscout/
 
-### Task 5: Connected the Internet Archive API
+### Task 5: Connected the Google Books API
 
-Added an independent Internet Archive request module and mapped its responses for use by the application.
+Added an independent Google Books request module and mapped its responses for use by the application.
 
-- Source: `src/js/api/internetArchive.js`
-- GitHub: https://github.com/RRegnieRR/shelfscout/blob/main/src/js/api/internetArchive.js
+- Source: `src/js/api/googleBooks.js`
+- GitHub: https://github.com/RRegnieRR/shelfscout/blob/main/src/js/api/googleBooks.js
 - Live site: https://rregnierr.github.io/shelfscout/
 
 ### Task 6: Connected the Open Library API
