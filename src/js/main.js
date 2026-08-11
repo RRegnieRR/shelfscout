@@ -142,6 +142,7 @@ function handleBookAction(event) {
 async function searchBooks(query) {
   activeRequest?.abort();
   activeRequest = new AbortController();
+  sourceFilter.value = "all";
   results.replaceChildren();
   resultTools.hidden = true;
   pagination.hidden = true;
