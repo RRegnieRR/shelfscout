@@ -675,10 +675,16 @@ footer a {
   }
 
   .site-header {
-    min-height: 84px;
+    min-height: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 0;
   }
 
   .brand {
+    justify-content: center;
+    width: 100%;
     letter-spacing: 0.08em;
   }
 
@@ -688,7 +694,9 @@ footer a {
   }
 
   nav {
-    gap: 0.9rem;
+    justify-content: center;
+    width: 100%;
+    gap: clamp(1rem, 7vw, 2rem);
   }
 
   nav a {
@@ -697,7 +705,18 @@ footer a {
   }
 
   .hero {
-    padding-top: 4.5rem;
+    padding: 3.25rem 0 3rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 10vw, 2.75rem);
+    line-height: 1.12;
+  }
+
+  .hero-copy {
+    margin-bottom: 2rem;
+    font-size: 0.96rem;
+    line-height: 1.65;
   }
 
   .search-controls {
@@ -708,10 +727,58 @@ footer a {
     min-height: 52px;
   }
 
+  .quick-searches,
+  .recent-searches,
+  .recent-searches > div {
+    justify-content: flex-start;
+  }
+
+  .quick-searches > span,
+  .recent-searches > span {
+    flex-basis: 100%;
+    text-align: left;
+  }
+
+  .results-section,
+  .shelf-section {
+    padding: 3rem 0;
+  }
+
   .results-heading,
   footer {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .results-heading {
+    margin-bottom: 1.75rem;
+  }
+
+  .result-tools {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    margin-top: -0.5rem;
+  }
+
+  .result-tools select {
+    width: 100%;
+  }
+
+  .book-grid {
+    gap: 2.5rem;
+  }
+
+  .book-cover {
+    height: 260px;
+  }
+
+  .book-actions {
+    width: 100%;
+  }
+
+  .book-action {
+    flex: 1 1 8rem;
   }
 
   .about {
@@ -720,10 +787,52 @@ footer a {
 
   .book-detail {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding: 3.25rem 1rem 1.25rem;
   }
 
   .book-detail__cover {
-    min-height: 260px;
+    min-height: 220px;
+    padding: 1.25rem;
+  }
+
+  .book-detail__cover img {
+    max-height: 260px;
+  }
+
+  .detail-actions,
+  .detail-actions > * {
+    width: 100%;
+  }
+
+  .pagination {
+    gap: 0.6rem;
+  }
+
+  .about {
+    margin-bottom: 2rem;
+    padding: 3rem 1.25rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .site-header,
+  main,
+  footer {
+    width: min(100% - 1.5rem, 1120px);
+  }
+
+  .result-tools {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-searches,
+  .recent-searches > div {
+    gap: 0.6rem;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
   }
 }
 
