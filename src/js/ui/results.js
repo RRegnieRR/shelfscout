@@ -55,9 +55,8 @@ function createBookCard(book, entry = {}) {
     body.append(createElement("p", "book-description", book.description));
   }
 
-  if (entry.favorite || READING_LABELS[entry.status]) {
-    const labels = [entry.favorite ? "Favorite" : "", READING_LABELS[entry.status] || ""].filter(Boolean);
-    body.append(createElement("p", "library-status", labels.join(" · ")));
+  if (READING_LABELS[entry.status]) {
+    body.append(createElement("p", "library-status", `Saved · ${READING_LABELS[entry.status]}`));
   }
 
   const actions = createElement("div", "book-actions");
@@ -66,22 +65,14 @@ function createBookCard(book, entry = {}) {
   details.dataset.action = "details";
   details.dataset.bookId = book.id;
 
-  const favorite = createElement("button", "book-action", entry.favorite ? "★ Favorite" : "☆ Favorite");
-  favorite.type = "button";
-  favorite.dataset.action = "favorite";
-  favorite.dataset.bookId = book.id;
-  favorite.setAttribute("aria-pressed", String(Boolean(entry.favorite)));
-
-  const reading = createElement(
-    "button",
-    "book-action",
-    entry.status && entry.status !== "none" ? READING_LABELS[entry.status] : "+ Reading list",
-  );
-  reading.type = "button";
-  reading.dataset.action = "reading-list";
-  reading.dataset.bookId = book.id;
-  reading.setAttribute("aria-pressed", String(Boolean(entry.status && entry.status !== "none")));
-  actions.append(details, favorite, reading);
+  actions.append(details);
+  if (!entry.status) {
+    const save = createElement("button", "book-action save-button", "Save to My Shelf");
+    save.type = "button";
+    save.dataset.action = "save-to-shelf";
+    save.dataset.bookId = book.id;
+    actions.append(save);
+  }
   body.append(actions);
 
   const sourceLink = createElement("a", "book-link", "View source");

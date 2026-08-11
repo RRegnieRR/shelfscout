@@ -10,14 +10,14 @@ Created a reusable Fetch timeout helper and connected it to both the Open Librar
 
 ## Task completed: Built the book details view
 
-Added an accessible details dialog for every result and saved book. The view displays the cover, title, author, publication year, ISBN, description, data source, favorite control, and reading status.
+Added an accessible details dialog for every result and saved book. The view displays the cover, title, author, publication year, ISBN, description, data source, and My Shelf controls.
 
 - Source: https://github.com/RRegnieRR/shelfscout/blob/main/src/js/ui/details.js
 - Live site: https://rregnierr.github.io/shelfscout/
 
-## Task completed: Added favorites and a reading list
+## Task completed: Added My Shelf and reading statuses
 
-Added favorite controls, reading statuses (Want to Read, Reading, and Finished), and a My Shelf section. The library is stored locally and remains available after reloading the page.
+Added a clear Save to My Shelf action and reading statuses (Want to read, Reading, and Finished). Saved books can be updated or explicitly removed, and the shelf remains available after reloading the page.
 
 - Source: https://github.com/RRegnieRR/shelfscout/blob/main/src/js/storage/library.js
 - Related source: https://github.com/RRegnieRR/shelfscout/blob/main/src/js/ui/results.js
@@ -41,7 +41,7 @@ Added source filtering, title/year sorting, six results per page, page status, a
 
 ## Task completed: Tested mobile and desktop layouts
 
-Verified responsive layouts, result controls, the details dialog, favorites, reading statuses, recent-search persistence, pagination, and the My Shelf view. The 390-pixel mobile test had no horizontal overflow.
+Verified responsive layouts, result controls, the details dialog, My Shelf statuses, recent-search persistence, pagination, and the My Shelf view. The 390-pixel mobile test had no horizontal overflow.
 
 - Source: https://github.com/RRegnieRR/shelfscout/blob/main/src/css/styles.css
 - Live site: https://rregnierr.github.io/shelfscout/
@@ -52,8 +52,8 @@ Verified responsive layouts, result controls, the details dialog, favorites, rea
 - The Vite production build succeeds.
 - A simulated slow request stops after the configured timeout.
 - A simulated user cancellation remains distinguishable from a timeout.
-- Details, favorites, reading statuses, recent searches, filters, sorting, and pagination pass interaction checks.
-- Favorites, reading status, and recent searches persist after a page reload.
+- Details, My Shelf statuses, recent searches, filters, sorting, and pagination pass interaction checks.
+- Saved books, reading status, and recent searches persist after a page reload.
 - The mobile layout fits a 390-pixel viewport without horizontal overflow.
 - The deployed page loads successfully.
 

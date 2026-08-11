@@ -484,6 +484,27 @@ h1 {
   border-color: var(--ink);
 }
 
+.save-button {
+  border-color: var(--ink);
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.save-button:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.remove-button {
+  border-color: var(--error);
+  color: var(--error);
+}
+
+.remove-button:hover {
+  color: var(--paper);
+  background: var(--error);
+}
+
 .library-status {
   margin: 0.2rem 0 0;
   color: var(--accent);

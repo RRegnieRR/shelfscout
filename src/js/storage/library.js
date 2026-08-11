@@ -1,6 +1,6 @@
 const LIBRARY_KEY = "shelfscout-library";
 const RECENT_SEARCHES_KEY = "shelfscout-recent-searches";
-const VALID_STATUSES = new Set(["none", "want-to-read", "reading", "finished"]);
+const VALID_STATUSES = new Set(["want-to-read", "reading", "finished"]);
 
 function readArray(key) {
   try {
@@ -15,19 +15,50 @@ function writeArray(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
-export function getLibrary() {
-  return readArray(LIBRARY_KEY).filter((entry) => entry?.book?.id);
+function normalizeEntry(entry) {
+  if (!entry?.book?.id) return null;
+
+  const status = VALID_STATUSES.has(entry.status)
+    ? entry.status
+    : entry.favorite
+      ? "want-to-read"
+      : null;
+
+  if (!status) return null;
+
+  const now = new Date().toISOString();
+  return {
+    book: entry.book,
+    status,
+    dateAdded: entry.dateAdded || entry.updatedAt || now,
+    updatedAt: entry.updatedAt || now,
+  };
 }
 
-function saveEntry(book, changes) {
+export function getLibrary() {
+  const stored = readArray(LIBRARY_KEY);
+  const library = stored.map(normalizeEntry).filter(Boolean);
+
+  if (JSON.stringify(stored) !== JSON.stringify(library)) {
+    writeArray(LIBRARY_KEY, library);
+  }
+
+  return library;
+}
+
+function saveEntry(book, status) {
   const library = getLibrary();
   const index = library.findIndex((entry) => entry.book.id === book.id);
-  const current = index >= 0 ? library[index] : { book, favorite: false, status: "none" };
-  const updated = { ...current, ...changes, book };
+  const now = new Date().toISOString();
+  const current = index >= 0 ? library[index] : null;
+  const updated = {
+    book,
+    status,
+    dateAdded: current?.dateAdded || now,
+    updatedAt: now,
+  };
 
-  if (!updated.favorite && updated.status === "none") {
-    if (index >= 0) library.splice(index, 1);
-  } else if (index >= 0) {
+  if (index >= 0) {
     library[index] = updated;
   } else {
     library.push(updated);
@@ -37,14 +68,21 @@ function saveEntry(book, changes) {
   return updated;
 }
 
-export function toggleFavorite(book) {
+export function saveToShelf(book) {
   const current = getLibrary().find((entry) => entry.book.id === book.id);
-  return saveEntry(book, { favorite: !current?.favorite });
+  return current || saveEntry(book, "want-to-read");
 }
 
 export function setReadingStatus(book, status) {
-  const safeStatus = VALID_STATUSES.has(status) ? status : "none";
-  return saveEntry(book, { status: safeStatus });
+  if (!VALID_STATUSES.has(status)) return null;
+  return saveEntry(book, status);
+}
+
+export function removeFromShelf(bookId) {
+  const library = getLibrary();
+  const updated = library.filter((entry) => entry.book.id !== bookId);
+  writeArray(LIBRARY_KEY, updated);
+  return updated.length !== library.length;
 }
 
 export function getRecentSearches() {

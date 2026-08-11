@@ -5,8 +5,9 @@ import {
   addRecentSearch,
   getLibrary,
   getRecentSearches,
+  removeFromShelf,
+  saveToShelf,
   setReadingStatus,
-  toggleFavorite,
 } from "./storage/library.js";
 import { renderBookDetails } from "./ui/details.js";
 import { renderBooks, renderStatus } from "./ui/results.js";
@@ -121,13 +122,12 @@ function handleBookAction(event) {
   if (!book) return;
 
   if (actionElement.dataset.action === "details") openDetails(book);
-  if (actionElement.dataset.action === "favorite") {
-    toggleFavorite(book);
+  if (actionElement.dataset.action === "save-to-shelf") {
+    saveToShelf(book);
     refreshSavedState();
   }
-  if (actionElement.dataset.action === "reading-list") {
-    const entry = libraryMap().get(book.id);
-    setReadingStatus(book, entry?.status && entry.status !== "none" ? "none" : "want-to-read");
+  if (actionElement.dataset.action === "remove-from-shelf") {
+    removeFromShelf(book.id);
     refreshSavedState();
   }
 }

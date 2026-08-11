@@ -45,36 +45,43 @@ export function renderBookDetails(container, book, entry = {}) {
   );
 
   const actions = createElement("div", "detail-actions");
-  const favorite = createElement("button", "secondary-button", entry.favorite ? "★ Favorited" : "☆ Favorite");
-  favorite.type = "button";
-  favorite.dataset.action = "favorite";
-  favorite.dataset.bookId = book.id;
-  favorite.setAttribute("aria-pressed", String(Boolean(entry.favorite)));
+  if (entry.status) {
+    const statusLabel = createElement("label", "reading-control", "My shelf status");
+    const select = document.createElement("select");
+    select.dataset.action = "reading-status";
+    select.dataset.bookId = book.id;
+    [
+      ["want-to-read", "Want to read"],
+      ["reading", "Reading"],
+      ["finished", "Finished"],
+    ].forEach(([value, label]) => {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = label;
+      select.append(option);
+    });
+    select.value = entry.status;
+    statusLabel.append(select);
 
-  const statusLabel = createElement("label", "reading-control", "Reading status");
-  const select = document.createElement("select");
-  select.dataset.action = "reading-status";
-  select.dataset.bookId = book.id;
-  [
-    ["none", "Not on list"],
-    ["want-to-read", "Want to read"],
-    ["reading", "Reading"],
-    ["finished", "Finished"],
-  ].forEach(([value, label]) => {
-    const option = document.createElement("option");
-    option.value = value;
-    option.textContent = label;
-    select.append(option);
-  });
-  select.value = entry.status || "none";
-  statusLabel.append(select);
+    const remove = createElement("button", "secondary-button remove-button", "Remove from shelf");
+    remove.type = "button";
+    remove.dataset.action = "remove-from-shelf";
+    remove.dataset.bookId = book.id;
+    actions.append(statusLabel, remove);
+  } else {
+    const save = createElement("button", "secondary-button save-button", "Save to My Shelf");
+    save.type = "button";
+    save.dataset.action = "save-to-shelf";
+    save.dataset.bookId = book.id;
+    actions.append(save);
+  }
 
   const source = createElement("a", "book-link", `View on ${book.source}`);
   source.href = book.sourceUrl;
   source.target = "_blank";
   source.rel = "noreferrer";
 
-  actions.append(favorite, statusLabel, source);
+  actions.append(source);
   content.append(actions);
   layout.append(close, cover, content);
   container.replaceChildren(layout);
