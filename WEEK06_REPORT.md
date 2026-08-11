@@ -2,7 +2,7 @@
 
 ## Task completed: Added timeouts for book-service requests
 
-Created a reusable Fetch timeout helper and connected it to both the Open Library and Google Books API modules. If either service stops responding, ShelfScout now leaves the loading state after 10 seconds and shows available results or a clear error message. Starting a new search still cancels the previous request.
+Created a reusable Fetch timeout helper and connected it to both the Open Library and Internet Archive API modules. If either service stops responding, ShelfScout now leaves the loading state after 10 seconds and shows available results or a clear error message. Starting a new search still cancels the previous request.
 
 - Source: https://github.com/RRegnieRR/shelfscout/blob/main/src/js/api/fetchWithTimeout.js
 - Related source: https://github.com/RRegnieRR/shelfscout/tree/main/src/js/api

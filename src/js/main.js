@@ -1,4 +1,4 @@
-import { searchGoogleBooks } from "./api/googleBooks.js";
+import { searchInternetArchive } from "./api/internetArchive.js";
 import { searchOpenLibrary } from "./api/openLibrary.js";
 import { deduplicateBooks } from "./models/book.js";
 import {
@@ -109,6 +109,13 @@ function openDetails(book) {
   dialog.showModal();
 }
 
+function interleaveBookGroups(groups) {
+  const longestGroup = Math.max(0, ...groups.map((group) => group.length));
+  return Array.from({ length: longestGroup }, (_, index) =>
+    groups.map((group) => group[index]).filter(Boolean),
+  ).flat();
+}
+
 function handleBookAction(event) {
   const actionElement = event.target.closest("[data-action]");
   if (!actionElement) return;
@@ -140,16 +147,17 @@ async function searchBooks(query) {
   pagination.hidden = true;
   resultCount.textContent = "";
   resultsTitle.textContent = `Searching for “${query}”`;
-  renderStatus(status, "Checking Open Library and Google Books…", "loading");
+  renderStatus(status, "Checking Open Library and Internet Archive…", "loading");
 
   const searches = await Promise.allSettled([
     searchOpenLibrary(query, activeRequest.signal),
-    searchGoogleBooks(query, activeRequest.signal),
+    searchInternetArchive(query, activeRequest.signal),
   ]);
 
   if (activeRequest.signal.aborted) return;
   const successfulSearches = searches.filter((search) => search.status === "fulfilled");
-  currentBooks = deduplicateBooks(successfulSearches.flatMap((search) => search.value)).slice(0, 24);
+  const combinedBooks = interleaveBookGroups(successfulSearches.map((search) => search.value));
+  currentBooks = deduplicateBooks(combinedBooks).slice(0, 24);
   currentPage = 1;
   resultsTitle.textContent = `Results for “${query}”`;
 

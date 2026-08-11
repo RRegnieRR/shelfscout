@@ -34,12 +34,12 @@ Implemented the search controls and responsive visual system with visible focus 
 - GitHub: https://github.com/RRegnieRR/shelfscout/blob/main/src/css/styles.css
 - Live site: https://rregnierr.github.io/shelfscout/
 
-### Task 5: Connected the Google Books API
+### Task 5: Connected the Internet Archive API
 
-Added an independent Google Books request module and mapped its responses for use by the application.
+Added an independent Internet Archive request module and mapped its responses for use by the application.
 
-- Source: `src/js/api/googleBooks.js`
-- GitHub: https://github.com/RRegnieRR/shelfscout/blob/main/src/js/api/googleBooks.js
+- Source: `src/js/api/internetArchive.js`
+- GitHub: https://github.com/RRegnieRR/shelfscout/blob/main/src/js/api/internetArchive.js
 - Live site: https://rregnierr.github.io/shelfscout/
 
 ### Task 6: Connected the Open Library API
@@ -85,7 +85,7 @@ This week I learned how to coordinate multiple asynchronous API requests while k
 - Vite production build succeeds.
 - Lighthouse scores 100 for accessibility, best practices, and SEO in the local mobile audit.
 - Open Library returned live search results during testing.
-- The partial-service state behaved correctly when Google Books was blocked by the local browser's privacy filter.
+- The partial-service state behaved correctly when one source was temporarily unavailable.
 - The application has no horizontal overflow in the tested desktop viewport and includes a mobile breakpoint at 680px.
 
 ## Project tracking

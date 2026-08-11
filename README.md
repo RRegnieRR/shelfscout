@@ -1,6 +1,6 @@
 # ShelfScout
 
-ShelfScout searches Open Library and Google Books at the same time and presents normalized book information in one responsive interface.
+ShelfScout searches Open Library and Internet Archive at the same time and presents normalized book information in one responsive interface.
 
 Live site: [https://rregnierr.github.io/shelfscout/](https://rregnierr.github.io/shelfscout/)
 
@@ -9,7 +9,7 @@ Live site: [https://rregnierr.github.io/shelfscout/](https://rregnierr.github.io
 - Created an independent Vite project with ESLint and Prettier configuration.
 - Built a semantic, accessible page shell and search form.
 - Established reusable colors, typography, spacing, and responsive layouts.
-- Added API clients for Open Library and Google Books.
+- Added API clients for Open Library and Internet Archive.
 - Defined one normalized book model and ISBN/title-based deduplication.
 - Added safe DOM rendering for book cards and loading, empty, partial-failure, and full-error states.
 
@@ -41,6 +41,6 @@ npm run build
 ## Data sources
 
 - [Open Library Search API](https://openlibrary.org/dev/docs/api/search)
-- [Google Books API](https://developers.google.com/books/docs/v1/using)
+- [Internet Archive Advanced Search API](https://archive.org/advancedsearch.php)
 
-No API key is required for the current public search prototype. A Google Books API key may be added later if production quota requires it.
+No API key is required for either public search endpoint.
